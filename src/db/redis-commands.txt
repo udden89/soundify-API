@@ -1,0 +1,81 @@
+
+
+
+
+-------------------------------------------------
+IFALL NI VILL INSTALLERA REDIS, HÄR ÄR YOUTUBE KLIPPET::
+https://www.youtube.com/watch?v=jgpVdJB2sKQ&t=1469s
+
+OCH SEN MÅSTE NI INSTALLERA EN VIRTUAL MACHINE AV LINUX PÅ DATORN (BARA CLIn), HÄR ÄR GUIDE::
+https://docs.microsoft.com/en-us/windows/wsl/install
+--------------------------------------------------
+
+
+
+
+Detta är en key/value database.. vi kommer antingen setta ett value för en key.. eller getta..
+
+Allt kommer vara string by default.. även om jag skriver ett nummer.
+
+------------------------------------------------------------------------------
+BASIC COMMANDS
+------------------------------------------------------------------------------
+
+redis-cli = nu kan vi accessa redis och köra commands genom clin!
+quit      = stäng ner
+SET name Daniel = sätt keyn
+GET name = hämta keyn
+DEL name = deleta keyn
+EXISTS name = finns keyn
+KEYS *  = hämta alla keys via patternet ("*" i detta fallet)
+flushall = töm hela databasen 
+clear = rensa terminal outputten
+ttl name = time to live.. -1 by default (no expiration) om jag inte sätter den
+expire name 10 = expirea name keyn efter 10 sekunder..
+setex name 100 Daniel = SET key och lägg expiration (100s) samtidigt!
+
+
+JAG KOMMER MEST HANTERA STRINGS.. MEN REDIS HAR OCKSÅ SUPPORT FÖR ARRAYS I FORMEN AV LIST! OCH ÄVEN HASHES FÖR ATT STOREA JSON OBJEKT
+
+------------------------------------------------------------------------------
+LISTS
+------------------------------------------------------------------------------
+
+lpush key value [value...] = pusha in in key+value till start av min list! (l står för  left)
+  EXEMPEL: lpush friends john   ... nu kommer vi få fel ifall vi kör GET friends.. pga john är en array!   
+           GET fungerar bara för strings!
+lrange key start stop  = Såhär hämtar jag ut keys!
+  EXEMPEL:  lrange friends 0 -1 = detta betyder hämta alla items ur listan!
+rpush friends mike = lägger till på slutet av listan!
+LPOP friends = tar första itemet från början (left) och plockar ut den och returnerar den till oss!
+RPOP friends = Samma fast motsatt håll!
+
+-------------------------------------------------------------------
+DETTA ÄR USEFUL IFALL JAG HAR T EX EN MESSAGING APP DÄR JAG VILL CACHEA DE 5 MEST RECENT MESSAGES FRÅN EN USER!  
+Jag kör lpush för att lägga till ny på arrayen.. och RPOP för att plocka ut sista i listan!
+-----------------------------------------------
+
+------------------------------------------------------------------------------
+SETS - LIKNANDE LIST.. DET ÄR ARRAY , MEN DET ÄR UNIQUE ARRAY.. VARJE VALUE ÄR UNIKT! I INGEN ORDNING!!
+------------------------------------------------------------------------------
+Prefixa allt med "S"..
+
+SADD key member [member...] = Lägg till i setet
+  EXEMPEL: SADD hobbies "weight lifting"
+SMEMBERS hobbies = Hämta alla values i setet!
+SREM hobbies "weight lifting" = Ta bort från setet
+
+------------------------------------------------------------------------------
+HASHES - Key+value pair inuti en key+value pair!.. kan dock inte ha HASHES unuti en HASH..
+        Det är lite som ett JSON objekt, men jag kan inte ha nesting där.. bara 1 set av key + value pairs!
+------------------------------------------------------------------------------
+Prefixa allt med "H"..
+
+HSET person name kyle = Set en hash med keyn person och value name!
+HGET person name = hämta hash med keyn person och dens value
+HGETALL person = Hämta alla värden från person.. key + valuet dvs !
+HDEL person age = deleta age propertyn!
+HEXISTS person name = returnerar 0 ifall den inte finns! 
+
+
+Jättebra att veta.. men.. NÄSTAN ALLT JAG KOMMER ATT GÖRA I REDIS, KOMMER VARA SPECIFICALLY STRINGS!!!!
