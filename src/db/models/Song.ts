@@ -4,7 +4,7 @@ import { Artist } from './Artist'
 export interface Song {
   name: string
   artist: Artist[]
-  thumbnails: []
+  thumbnail: string
   videoId: string
   album: {}
   duration: number

@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose'
-import Song from '../models/Song'
+import { Song } from '../models/Song'
 
 const songSchema = new Schema<Song>(
   {
