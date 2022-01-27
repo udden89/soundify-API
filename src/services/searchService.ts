@@ -14,7 +14,8 @@ const searchService = async (type: string, query: string, next: string) => {
 const fetchFromHeroku = async (type: string, query: string, next?: string) => {
 
   const next2 = next ? `?next=${next}` : ""
-  const path = `${process.env.HEROKU}${type}/${query}${next2}`
+  const path = `https://soundify-sweden.herokuapp.com/api/yt/${type}/${query}${next2}`
+  /* const path = `${process.env.HEROKU}${type}/${query}${next2}` */
 
   let response = await fetch(path)
 
