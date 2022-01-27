@@ -12,6 +12,8 @@ export default async function (): Promise<Application> {
   //app.use(morgan('combined'))
   app.use(express.json())
   // redisClient.connect()
+  console.log("up and running!")
+
 
   Routes(app)
   return app
