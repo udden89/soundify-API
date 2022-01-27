@@ -11,6 +11,9 @@ router.get('/:mediaType', async (req: Request, res: Response) => {
 
   const result = await searchService(mediaType, query, next)
 
+  console.log(result)
+
+
   if (result) {
     return res.json(result)
   } else {
