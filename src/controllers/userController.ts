@@ -32,11 +32,14 @@ router.post('/login', async (req: Request, res: Response) => {
 
     if (!user) throw new Error('Could not log in. Please check credentials.')
 
-    const token = await user.generateAuthToken()
-    const resUser = await user.getPublicProfile()
+    if (user) {
+      const token = await user.generateAuthToken()
+      const resUser = await user.getPublicProfile()
 
-    res.cookie('loggedIn', token, { maxAge: 900000000, httpOnly: true })
-    res.send(resUser)
+      res.cookie('loggedIn', token, { maxAge: 900000000, httpOnly: true })
+      res.send(resUser)
+    }
+
   } catch (e: any) {
     console.log(e)
     res.sendStatus(500).json(e.msg)
