@@ -94,9 +94,7 @@ router.get('/whoami', async (req: Request, res: Response) => {
       if (!currentUser) {
         return res.send({ message: 'nothing' })
       }
-
-      res.send(currentUser.getPublicProfile())
-      return
+      return res.send(currentUser.getPublicProfile())
     } catch (err) {
       res.status(500).send(err)
     }
