@@ -17,7 +17,7 @@ router.get('/:mediaType', async (req: Request, res: Response) => {
   if (result) {
     return res.json(result)
   } else {
-    return res.sendStatus(500).json(result.message)
+    return res.sendStatus(500).json(result?.message)
   }
 })
 
